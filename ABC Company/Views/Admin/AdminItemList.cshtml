@@ -1,0 +1,48 @@
+﻿@model CatModel;
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" @* style="width: 1000px; *@">
+        <h3 class="text-center mb-4">List of Car/Car Parts</h3>
+
+        <div class="container mt-4">
+            <h2>Sample Table</h2>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Items != null)
+                    {
+                        foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td><img src="@item.ImageUrl" width="100" height="50" /></td>
+                                <td>@item.ItemName</td>
+                                <td>@item.Description</td>
+                                <td>@item.Category.Name</td>
+                                <td>@item.Price</td>
+                                <td><a href="/Admin/EditItemDetails?Id=@item.Id"><img src="https://www.svgrepo.com/show/97593/pencil.svg" width="25px" height="25px" /></a></td>
+                            </tr>
+                       
+                        }
+
+                    }
+
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

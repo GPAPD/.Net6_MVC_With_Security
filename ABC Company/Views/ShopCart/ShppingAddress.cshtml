@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model OrderModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">Shipping Address</h2>
+    <form action="/ShopCart/AddOrder" method="post">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="FristName" placeholder="Enter your first name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="SecondName" placeholder="Enter your last name" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="Address1" placeholder="1234 Main St" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="address2" class="form-label">Address 2 (Optional)</label>
+            <input type="text" class="form-control" id="address2" name="Address2" placeholder="Apartment, studio, or floor" required>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="City" placeholder="Enter your city" required>
+            </div>
+            <div class="col-md-2">
+                <label for="postalCode" class="form-label">Postal Code</label>
+                <input type="text" class="form-control" id="postalCode" name="PostalCode" placeholder="Zip Code" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" name="Country" placeholder="Country" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Contact" class="form-label">Contact</label>
+            <input type="text" class="form-control" id="Contact" name="Contact" placeholder="Contact Number" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

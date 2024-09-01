@@ -1,0 +1,48 @@
+﻿@model OrderModel
+
+@{
+    ViewData["Title"] = "Order";
+}
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" @* style="width: 1000px; *@">
+        <h3 class="text-center mb-4">List of Car/Car Parts</h3>
+
+        <div class="container mt-4">
+            <h2>Sample Table</h2>
+            @if (Model != null)
+            {
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>OrderId</th>
+                            <th>Name</th>
+                            <th>ShipAddtress</th>
+                            <th>Contact</th>
+                            <th>Total</th>
+                            <th>OrderDate</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.MyOrderList)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.FristName @order.SecondName </td>
+                                <td>@order.Address1 @order.Address2 @order.City</td>
+                                <td>@order.Contact</td>
+                                <td>@order.Total</td>
+                                <td>@order.OrderDate</td>
+                                <td><a href="/Admin/UpdateOrderStatus?OrdId=@order.Id"><img src="https://www.svgrepo.com/show/97593/pencil.svg" width="25px" height="25px" /></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

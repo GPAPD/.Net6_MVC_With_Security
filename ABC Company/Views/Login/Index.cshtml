@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "LogIn";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LogInModel
+
+@* LogIn Form *@
+@{
+    if (Model.ErrorMsgList != null && Model.ErrorMsgList.Count > 0)
+    {
+        foreach (var error in Model.ErrorMsgList)
+        {
+            <div class="alert alert-danger" role="alert">
+                @error
+            </div>
+        }
+    }
+}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="width: 400px;">
+        <h3 class="text-center mb-4">Login</h3>
+        <form method="post" action="~/Login/AuthUser">
+            <div class="mb-3">
+                <label for="email" class="form-label">User Name</label>
+                <input type="text" class="form-control" id="email" name="userName" placeholder="Enter your Username" required>
+            </div>
+@*             <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div> *@
+            <div class="mb-3">
+                <label for="Input_Password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="Input_Password" name="password" placeholder="Enter your password" required>
+                    <span class="input-group-text cursor-pointer" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                @* <input id="RememberMe" type="checkbox" name="rememberMe" class="form-check-input" /> *@
+                <label>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    Remember Me
+                </label>
+                @* <label for="RememberMe" class="form-check-label">Remember Me</label> *@
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <p class="text-center mt-3">Don't have an account? <a href="~/Login/Register">Register here</a></p>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function (e) {
+        const passwordInput = document.getElementById('Input_Password');
+        const icon = this.querySelector('i');
+
+        // Toggle the type attribute
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+</script>

@@ -1,0 +1,104 @@
+﻿
+@{
+	ViewData["Title"] = "Cart Page";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model OrderModel
+
+
+@if (Model.ThisOrder != null && Model.ThisOrder.Id > 0)
+{
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2 class="mb-0">Order Complete</h2>
+                <p class="text-success">Thank you for your purchase!</p>
+            </div>
+            <div class="card-body" id="receiptContent">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        <h5>Your Order Number: <strong>#@Model.ThisOrder.Id</strong></h5>
+                    </div>
+                    <div class="col-12">
+                        <h4 class="mb-3">Receipt</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach (var item in Model.ThisOrder.Shopcart.ShopCartItems)
+                                        {
+                                            <td>@item.Id</td>
+                                            <td>@item.Qty</td>
+                                            <td>LKR.@item.Item.Price</td>
+                                            <td>LKR.@item.ItemPrice</td>
+                                        
+                                        }
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                                        <td>LKR. @Model.ThisOrder.SubTotal</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Shipping</strong></td>
+                                        <td>LKR. @Model.ThisOrder.ShipCost</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Tax</strong></td>
+                                        <td>LKR. @Model.ThisOrder.Tax</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                        <td><strong>LKR. @Model.ThisOrder.Total</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center mt-4">
+                        <a href="~/Home" class="btn btn-primary">Continue Shopping</a>
+                        <button class="btn btn-info" id="downloadPDF">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <p class="mb-0">If you have any questions, feel free to <a href="#">contact us</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.getElementById('downloadPDF').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add content to the PDF
+            doc.text("Order Receipt", 10, 10);
+            doc.text("Order Number: #@Model.ThisOrder.Id", 10, 20);
+            doc.text("Thank you for your purchase!", 10, 30);
+            doc.text("-------------------------------------------------------------", 10, 40);
+            doc.text("-------------------------------------------------------------", 10, 50);
+            doc.text("Subtotal: LKR.@Model.ThisOrder.SubTotal", 10, 60);
+            doc.text("ShipCost: LKR.@Model.ThisOrder.ShipCost", 10, 70);
+            doc.text("Tax: LKR.@Model.ThisOrder.Tax", 10, 80);
+            doc.text("Total: LKR.@Model.ThisOrder.Total", 10, 90);
+            // Save the PDF
+            doc.save("receipt.pdf");
+        });
+    </script>
+
+}

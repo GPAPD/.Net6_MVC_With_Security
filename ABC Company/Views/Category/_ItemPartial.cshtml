@@ -1,0 +1,25 @@
+﻿@model CatModel
+
+<!-- Start Column-->
+
+@if (Model.Items != null)
+{
+	foreach (var car in Model.Items)
+	{
+		<div class="col-12 col-md-4 col-lg-3 mb-5">
+			<a class="product-item" href="/ShopCart/AddToCart?ItemId=@car.Id">
+				<img src="@car.ImageUrl" class="img-fluid product-thumbnail">
+				<h3 class="product-title">@car.ItemName</h3>
+				<strong class="product-price">Rs.@car.Price</strong>
+
+				<span class="icon-cross">
+					<img src="/images/cross.svg" class="img-fluid">
+				</span>
+			</a>
+		</div>
+	
+	}
+
+
+}
+<!-- End Column -->
